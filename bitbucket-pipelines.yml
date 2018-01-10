@@ -3,7 +3,7 @@ pipelines:
  custom:
   dev:
     - step:
-      script:
+       script:
         - ssh-keyscan $DEV_HOST >> ~/.ssh/known_hosts
         - echo $PRIVATE_DEV_KEY > ~/.ssh/id_rsa.tmp
         - base64 -d ~/.ssh/id_rsa.tmp > ~/.ssh/id_rsa
