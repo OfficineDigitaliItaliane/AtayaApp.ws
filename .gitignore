@@ -1,0 +1,9 @@
+.env
+*.env
+.DS_Store
+node_modules/
+.idea/
+logs
+package-lock\.json
+venv
+src/npm-debug\.log

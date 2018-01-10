@@ -1,0 +1,8 @@
+.gitignore
+*.md
+*.yml
+env_example
+.dockerignore
+Dockerfile
+.git/
+sqlschema/

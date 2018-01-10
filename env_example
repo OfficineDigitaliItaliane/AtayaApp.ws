@@ -1,0 +1,8 @@
+JWT_SECRET=my_super_secret_jwt_token
+MYSQL_ROOT_PASSWORD=ruah_super_root_pass
+MYSQL_USER=ruah_user
+MYSQL_PASSWORD=ruah_pass
+MYSQL_DATABASE=ruah_db
+MYSQL_HOST=mariadb
+MYSQL_PORT=3306
+NODE_ENV=development
