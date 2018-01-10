@@ -2,13 +2,13 @@ image: node:latest
 pipelines:
  custom:
   dev:
-  - step:
-    script:
-      - ssh-keyscan $DEV_HOST >> ~/.ssh/known_hosts
-      - echo $PRIVATE_DEV_KEY > ~/.ssh/id_rsa.tmp
-      - base64 -d ~/.ssh/id_rsa.tmp > ~/.ssh/id_rsa
-      - chmod 400 ~/.ssh/id_rsa
-      - sh bin/deploy-dev.sh
+    - step:
+      script:
+        - ssh-keyscan $DEV_HOST >> ~/.ssh/known_hosts
+        - echo $PRIVATE_DEV_KEY > ~/.ssh/id_rsa.tmp
+        - base64 -d ~/.ssh/id_rsa.tmp > ~/.ssh/id_rsa
+        - chmod 400 ~/.ssh/id_rsa
+        - sh bin/deploy-dev.sh
  branches:
   master:
    - step:
