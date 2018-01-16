@@ -7,3 +7,6 @@ logs
 package-lock\.json
 venv
 src/npm-debug\.log
+book
+.vscode
+

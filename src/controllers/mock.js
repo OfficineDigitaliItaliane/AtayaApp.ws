@@ -14,8 +14,9 @@ export async function getBook(req, res, next){
         var file = path.normalize(__dirname + '/../..') + '/book/book.zip'
         var filename = path.basename(file)
         var mimetype = mime.lookup(file)
-        res.setHeader('Content-disposition', 'attachment; filename='+filename)
-        res.setHeader('Content-type', mimetype)
+        res.setHeader('Content-Disposition', 'attachment; filename='+filename)
+        res.setHeader('Content-Type', mimetype)
+        res.setHeader('Content-Length', fs.statSync(file).size)
         var filestream = fs.createReadStream(file)
         filestream.pipe(res)
     } catch (err) {
