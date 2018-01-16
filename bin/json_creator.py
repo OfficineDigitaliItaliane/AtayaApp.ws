@@ -151,7 +151,7 @@ def _letters(word):
     for key, value in enumerate(set(word)):
         if value not in letters:
             letters.append({
-                'id': 1000 + key
+                'id': 1000 + key,
                 'text': value,
                 'order': _get_occurences(word, value)
             })
