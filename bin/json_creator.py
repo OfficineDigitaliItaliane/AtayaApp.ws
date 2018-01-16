@@ -125,7 +125,7 @@ def write():
     write = []
     for i in range(0, 10):
         for _ in range(10):
-            id = random.randrange(0, 10)
+            id = random.randrange(0, 100)
             word = fake.word(ext_word_list=None)
             if i <= 5:
                 write.append({
