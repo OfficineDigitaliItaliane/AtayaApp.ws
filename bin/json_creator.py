@@ -36,7 +36,7 @@ def __get_remote_file(file_type):
 def understand():
     understand = []
     for i in range(0, 10):
-        id = random.randrange(1, 1000)
+        id = 1000+i
         questions, answers = __questions(id)
         understand.append({
             "id":id,
@@ -52,8 +52,8 @@ def __questions(section_id):
     fake = Faker()
     q = []
     a = []
-    for _ in range(10):
-        idq = random.randrange(1, 1000)
+    for i in range(10):
+        idq = 2000+i
         q.append({
             'id':idq,
             'section_id':section_id,
@@ -61,8 +61,8 @@ def __questions(section_id):
             'audio':__get_remote_file('audio')
         })
         is_correct = False
-        for _ in range(10):
-            ida = random.randrange(1001, 2000)
+        for i in range(10):
+            ida = 2000 + i
             if is_correct:
                 correct = False
             else:
@@ -80,9 +80,9 @@ def __questions(section_id):
 def speak():
     speak = []
     for i in range(0, 10):
-        for _ in range(10):
+        for i in range(10):
             speak.append({
-                'id':random.randrange(0, 100),
+                'id':100 + i,
                 'unit_id':i,
                 'picture':__get_remote_file('image'),
                 'audio':__get_remote_file('audio'),
@@ -92,7 +92,7 @@ def speak():
 def read():
     read = []
     for i in range(0, 10):
-        id = random.randrange(0, 100)
+        id = 100 + i
         read.append({
             'id': id,
             'unit_id':i,
@@ -112,7 +112,7 @@ def _options(id):
             correct = bool(random.getrandbits(1))
             is_correct = correct
         options.append({
-            'id':random.randrange(101, 200),
+            'id':200 + i,
             'read_id':id,
             'body':fake.word(ext_word_list=None),
             'audio':__get_remote_file('audio'),
@@ -124,8 +124,8 @@ def write():
     fake = Faker()
     write = []
     for i in range(0, 10):
-        for _ in range(10):
-            id = random.randrange(0, 100)
+        for i in range(10):
+            id = i + 100
             word = fake.word(ext_word_list=None)
             if i <= 5:
                 write.append({
@@ -151,7 +151,7 @@ def _letters(word):
     for key, value in enumerate(set(word)):
         if value not in letters:
             letters.append({
-                'id': random.randrange(1, 1000),
+                'id': 1000 + key
                 'text': value,
                 'order': _get_occurences(word, value)
             })
