@@ -53,7 +53,7 @@ def __questions(section_id):
     q = []
     a = []
     for i in range(10):
-        idq = 2000+i
+        idq = 2000+int(section_id)+i
         q.append({
             'id':idq,
             'section_id':section_id,

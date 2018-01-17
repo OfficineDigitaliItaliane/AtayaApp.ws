@@ -24,9 +24,16 @@ export async function getBook(req, res, next){
     }
 }
 
+export async function isUpdate(req, res, next){
+    try{
+        return res.status(200).send(true).end()
+    }catch(err){
+        return next(err.name)
+    }
+}
+
 export async function createZip(req, res, next){
     try{
-    
     }catch(err){
         return next(err.name)
     }
