@@ -37,7 +37,7 @@ def __get_remote_file(file_type):
 def __get_id():
     time.sleep(1)
     seed = random.randrange(1000, 11456)
-    return int(time.time())+seed
+    return int(time.time()) + seed
 
 def understand():
     understand = []
@@ -68,8 +68,7 @@ def __questions(section_id):
         })
         is_correct = False
         for _ in range(10):
-            time.sleep(0.5)
-            ida = int(time.time())
+            ida = __get_id()
             if is_correct:
                 correct = False
             else:
