@@ -4,6 +4,6 @@ const router = new Router();
 const mock = require('../controllers/mock')
 
 router.get('/book', mock.getBook)
-router.get('/book/update', mock.isUpdate)
+router.get('/book/update/:result?', mock.isUpdate)
 
 module.exports = router

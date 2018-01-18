@@ -4,6 +4,7 @@ import random
 import os
 import urllib.request
 import shutil
+import time
 
 _BUCKET_URL = 'https://ruah-book.s3-eu-west-1.amazonaws.com'
 
@@ -33,10 +34,14 @@ def __get_remote_file(file_type):
             shutil.copyfileobj(response, out_file)
     return file_name
 
+def __get_id():
+    time.sleep(1)
+    return int(time.time())
+
 def understand():
     understand = []
     for i in range(0, 10):
-        id = 1000+i
+        id = __get_id()
         questions, answers = __questions(id)
         understand.append({
             "id":id,
@@ -52,8 +57,8 @@ def __questions(section_id):
     fake = Faker()
     q = []
     a = []
-    for i in range(10):
-        idq = 2000+int(section_id)+i
+    for _ in range(10):
+        idq = __get_id()
         q.append({
             'id':idq,
             'section_id':section_id,
@@ -61,8 +66,9 @@ def __questions(section_id):
             'audio':__get_remote_file('audio')
         })
         is_correct = False
-        for i in range(10):
-            ida = 2000 + i
+        for _ in range(10):
+            time.sleep(0.5)
+            ida = int(time.time())
             if is_correct:
                 correct = False
             else:
@@ -80,9 +86,9 @@ def __questions(section_id):
 def speak():
     speak = []
     for i in range(0, 10):
-        for i in range(10):
+        for _ in range(10):
             speak.append({
-                'id':100 + i,
+                'id':__get_id(),
                 'unit_id':i,
                 'picture':__get_remote_file('image'),
                 'audio':__get_remote_file('audio'),
@@ -92,7 +98,7 @@ def speak():
 def read():
     read = []
     for i in range(0, 10):
-        id = 100 + i
+        id = __get_id()
         read.append({
             'id': id,
             'unit_id':i,
@@ -112,7 +118,7 @@ def _options(id):
             correct = bool(random.getrandbits(1))
             is_correct = correct
         options.append({
-            'id':200 + i,
+            'id':__get_id(),
             'read_id':id,
             'body':fake.word(ext_word_list=None),
             'audio':__get_remote_file('audio'),
@@ -124,8 +130,8 @@ def write():
     fake = Faker()
     write = []
     for i in range(0, 10):
-        for i in range(10):
-            id = i + 100
+        for _ in range(10):
+            id = __get_id()
             word = fake.word(ext_word_list=None)
             if i <= 5:
                 write.append({

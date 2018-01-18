@@ -26,7 +26,11 @@ export async function getBook(req, res, next){
 
 export async function isUpdate(req, res, next){
     try{
-        return res.status(200).send(true).end()
+        var result = true
+        if(req.params.result){
+            result = req.params.result == 1 ? true : false
+        }
+        return res.status(200).send(result).end()
     }catch(err){
         return next(err.name)
     }
