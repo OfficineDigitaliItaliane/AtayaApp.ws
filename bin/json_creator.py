@@ -36,7 +36,8 @@ def __get_remote_file(file_type):
 
 def __get_id():
     time.sleep(1)
-    return int(time.time())
+    seed = random.randrange(1000, 11456)
+    return int(time.time())+seed
 
 def understand():
     understand = []
