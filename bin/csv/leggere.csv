@@ -1,0 +1,51 @@
+immagine,check,testo,audio,corretto
+CARRELLO-PIENO.jpg,1,zucchine,1.mp3,s
+,1,pollo,1.mp3,s
+,1,mele,1.mp3,n
+,1,latte,1.mp3,s
+,1,zucchero,1.mp3,s
+,1,riso,1.mp3,n
+,1,sale,1.mp3,n
+,1,euro,1.mp3,n
+,1,carote,1.mp3,s
+,1,farina,1.mp3,n
+VERDURE.jpg,2,cavolfiore,1.mp3,s
+,2,carote,1.mp3,n
+,2,melanzane,1.mp3,s
+,2,pomodori,1.mp3,s
+,2,cipolle,1.mp3,n
+,2,patate,1.mp3,n
+,2,finocchi,1.mp3,s
+,2,coste,1.mp3,s
+,2,insalata,1.mp3,n
+,2,carciofi,1.mp3,n
+FRUTTA.jpg,3,arance,1.mp3,n
+,3,more,1.mp3,n
+,3,banane,1.mp3,s
+,3,pesche,1.mp3,n
+,3,pere,1.mp3,s
+,3,aglio,1.mp3,n
+,3,uva,1.mp3,s
+,3,mele,1.mp3,s
+,3,olive,1.mp3,n
+,3,mandarini,1.mp3,s
+CEREALI.jpg,4,pane,1.mp3,s
+,4,pan grattato,1.mp3,n
+,4,cous cous,1.mp3,n
+,4,grissini,1.mp3,n
+,4,farina,1.mp3,s
+,4,patatine,1.mp3,n
+,4,riso,1.mp3,s
+,4,fette biscottate,1.mp3,n
+,4,pasta,1.mp3,s
+,4,biscotti,1.mp3,s
+BORSA-ECC.jpg,5,carta bancomat,1.mp3,s
+,5,catalogo,1.mp3,n
+,5,ricarica telefonica,1.mp3,n
+,5,tessera,1.mp3,n
+,5,monete,1.mp3,n
+,5,parcheggio,1.mp3,n
+,5,scontrino,1.mp3,s
+,5,borsa,1.mp3,s
+,5,sacchetti,1.mp3,s
+,5,5 euro,1.mp3,s
