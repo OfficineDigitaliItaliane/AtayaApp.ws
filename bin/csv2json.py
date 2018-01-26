@@ -146,7 +146,7 @@ def __questions(id, audio, rows):
                     'question_id':idq,
                     'body':row['Risposta '+str(i)],
                     'audio':__get_remote_file('audio', row['Audio '+str(i)]),
-                    'corretta': True if row['corretta '+str(i)] == 's' else False
+                    'correct': True if row['corretta '+str(i)] == 's' else False
                 })
     return q, a
 
