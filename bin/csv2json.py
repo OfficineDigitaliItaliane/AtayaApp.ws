@@ -5,6 +5,7 @@ import random
 import urllib.request
 import shutil
 import os
+import re
 
 _BUCKET_URL = 'https://ruah-book.s3-eu-west-1.amazonaws.com'
 
@@ -35,7 +36,7 @@ def read_understand():
                 understand.append({
                     "id":id,
                     "unit_id":1,
-                    "video_url":row['URL video'],
+                    "video_url":re.sub(r'https:\/\/youtu\.be\/', "", row['URL video']),
                     "audio":__get_remote_file('audio',row['Audio']),
                     "questions":questions,
                     "answers":answers
@@ -135,7 +136,7 @@ def __questions(id, audio, rows):
         if row['Audio'] == audio:
             q.append({
                 'id':idq,
-                'section_id':1,
+                'section_id':id,
                 'body':row['Testo domanda'],
                 'audio':__get_remote_file('audio', row['Audio domanda'])
             })
@@ -155,11 +156,11 @@ def create_file(book):
         bf.write(book)
 
 if __name__ == '__main__':
+
     book = {
         'understand':read_understand(),
         'speak':read_speak(),
         'read':read_read(),
         'write':read_write()
     }
-    #print(json.dumps(book))
     create_file(json.dumps(book))
