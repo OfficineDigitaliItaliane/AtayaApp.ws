@@ -2,8 +2,8 @@ import logger from './logger'
 
 export default (app) => {
   app.use(function (err, req, res, next) {
-    //let errorString = getErrorString(req, res, err)
-    //logger.error(errorString)
+    let errorString = getErrorString(req, res, err)
+    logger.error(errorString)
     // If error contains a code, then returns code directly as status. Else check error type
     let code = parseInt(err)
     if (code) {

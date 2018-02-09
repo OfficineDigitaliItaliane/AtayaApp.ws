@@ -18,7 +18,7 @@ class Auth {
       this.passport = passport
       this.strategy = new JwtStrategy(jwtOptions, async function (jwtPayload, next) {
         try {
-          let user = await userController.findUser(jwtPayload.id)
+          let user = await User.findById(jwtPayload.id)
           if (user) {
             return next(null, user)
           } else {

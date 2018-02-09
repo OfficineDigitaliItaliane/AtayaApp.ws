@@ -6,7 +6,6 @@ export default (app)=>{
 
     app.get('/health', (req, res) => res.send('ok'))
     app.use('/api',require('./api'))
-    app.use('/cms', require('./cms'))
     
     //all undefined assets or api routes should return a 404
     app.route('/:url(logs|bin|migrations|tests|config|node_modules|src)/*')
