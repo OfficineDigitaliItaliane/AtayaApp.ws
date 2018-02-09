@@ -14,7 +14,11 @@ const all = {
 
   // Secret for JWT
   secrets: {
-    session: process.env.JWT_SECRET
+    jwtSecret: process.env.JWT_SECRET,
+    jwtSession: {
+      session: false
+    },
+    cryptAlgorithm:'sha256'
   },
 }
 
