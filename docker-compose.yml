@@ -2,6 +2,8 @@ version: "3"
 volumes:
   ruah-db-data:
     driver: local
+  ruah-db-test-data:
+    driver: local
 services:
   web:
     restart: always
@@ -15,6 +17,23 @@ services:
         - /app/node_modules
     env_file: .env
     entrypoint: npm run-script run
+  testweb:
+    build: .
+    volumes:
+        - ./:/app
+        - /app/node_modules
+    links:
+        - mariadbtest:mariadbtest
+    env_file: .env_test
+  mariadbtest:
+    image: mariadb:latest
+    restart: always
+    env_file: .env_test
+    ports:
+      - 3308:3306
+    volumes:
+      - ruah-db-test-data:/var/lib/mysql
+      - ./database/:/docker-entrypoint-initdb.d
   mariadb:
     image: mariadb:latest
     restart: always

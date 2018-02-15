@@ -8,7 +8,7 @@ chai.use(chaiAsPromised)
 global.expect = chai.expect
 global.request = chai.request
 
-require('../src/test/index.spec.js')
+require('../src/api/cms.spec.js')
 
 after((done) => {
   models.sequelize.close()

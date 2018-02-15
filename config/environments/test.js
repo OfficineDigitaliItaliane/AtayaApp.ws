@@ -9,7 +9,8 @@ module.exports = {
         dbconf:{
             host: process.env.MYSQL_HOST,
             port: process.env.MYSQL_PORT,
-            dialect: "mysql"
+            dialect: "mysql",
+            operatorsAliases: false,
         }
     }
 };
