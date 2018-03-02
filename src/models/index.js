@@ -10,7 +10,7 @@ const dblogin = {}
 
 const sequelize = new Sequelize(config.dblogin.db, config.dblogin.user, config.dblogin.pass, config.dblogin.dbconf)
 
-let file = 'user.js'
+let file = 'oldUser.js'
 const model = sequelize['import'](path.join(__dirname, file))
 dblogin[model.name] = model
 
@@ -39,7 +39,7 @@ db['speak'] = mongoose.model('speak', require(path.join(__dirname, 'speak.js')) 
 db['write'] = mongoose.model('write', require(path.join(__dirname, 'write.js')) )
 db['read'] = mongoose.model('read', require(path.join(__dirname, 'read.js')) )
 db['understand'] = mongoose.model('understand', require(path.join(__dirname, 'understand.js')) )
-db['user'] = mongoose.model('user', require(path.join(__dirname, 'userDB.js')) )
+db['user'] = mongoose.model('user', require(path.join(__dirname, 'user.js')) )
 
 Object.keys(dblogin).forEach(function (modelName) {
     db[modelName] = dblogin[modelName]
