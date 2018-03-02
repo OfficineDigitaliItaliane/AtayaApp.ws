@@ -8,4 +8,4 @@ module.exports = new mongoose.Schema({
     letters: [{
         type: String
     }]
-})
+}, { versionKey: false})

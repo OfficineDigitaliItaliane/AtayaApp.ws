@@ -11,4 +11,4 @@ module.exports = new mongoose.Schema({
             correct: Boolean
         }
     ]
-})
+}, { versionKey: false})

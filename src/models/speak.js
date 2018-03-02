@@ -5,4 +5,4 @@ module.exports = new mongoose.Schema({
     unit_id: Number,
     picture: String,
     audio: String
-})
+}, { versionKey: false})
