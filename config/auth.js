@@ -2,7 +2,7 @@ import passport from 'passport'
 import passportJWT from 'passport-jwt'
 
 import {secrets} from '../config/environments'
-import * as user from '../src/repo/user'
+import * as userHandler from '../src/handlers/user-handler'
 
 const ExtractJwt = passportJWT.ExtractJwt
 const JwtStrategy = passportJWT.Strategy
@@ -18,7 +18,7 @@ class Auth {
       this.passport = passport
       this.strategy = new JwtStrategy(jwtOptions, async function (jwtPayload, next) {
         try {
-          let loggedUser = await user.findById(jwtPayload.userId)
+          let loggedUser = await userHandler.findById(jwtPayload.userId)
           if (loggedUser) {
             return next(null, loggedUser)
           } else {

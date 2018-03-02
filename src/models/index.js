@@ -10,15 +10,7 @@ const dblogin = {}
 
 const sequelize = new Sequelize(config.dblogin.db, config.dblogin.user, config.dblogin.pass, config.dblogin.dbconf)
 
-let file = 'oldUser.js'
-const model = sequelize['import'](path.join(__dirname, file))
-dblogin[model.name] = model
 
-Object.keys(dblogin).forEach(function (modelName) {
-    if (dblogin[modelName].associate) {
-        dblogin[modelName].associate(db)
-    }
-})
 
 dblogin.sequelize = sequelize // Used for transactions and query
 dblogin.Sequelize = Sequelize // Used for DataTypes

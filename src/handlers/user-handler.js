@@ -29,3 +29,16 @@ export async function findUserByEmailAndPassword(username, password) {
     })
   })
 }
+
+export async function findById(id) {
+  return new Promise(function (resolve, reject) {
+    user.findById(id).exec(function (error, result) {
+      if (error) {
+        reject(error)
+      }
+      else {
+        resolve(result)
+      }
+    })
+  })
+}
