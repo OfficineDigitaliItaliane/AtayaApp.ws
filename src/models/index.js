@@ -39,6 +39,7 @@ db['speak'] = mongoose.model('speak', require(path.join(__dirname, 'speak.js')) 
 db['write'] = mongoose.model('write', require(path.join(__dirname, 'write.js')) )
 db['read'] = mongoose.model('read', require(path.join(__dirname, 'read.js')) )
 db['understand'] = mongoose.model('understand', require(path.join(__dirname, 'understand.js')) )
+db['user'] = mongoose.model('user', require(path.join(__dirname, 'userDB.js')) )
 
 Object.keys(dblogin).forEach(function (modelName) {
     db[modelName] = dblogin[modelName]
