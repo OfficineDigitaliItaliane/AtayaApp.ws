@@ -39,11 +39,11 @@
  */
 
 /**
- * @api {post} /api/speak/:id Add a new speak
+ * @api {post} /api/speak Add a new speak
  * @apiGroup Speak
  * @apiUse authHeader
  *
- @apiSuccessExample {json} Success-Response:
+ * @apiParamExample {json} Request-Example:
  {
      "unit_id": 1,
      "picture": "picture.png",
@@ -56,7 +56,7 @@
  * @apiGroup Speak
  * @apiUse authHeader
  *
- @apiSuccessExample {json} Success-Response:
+ * @apiParamExample {json} Request-Example:
 {
     "unit_id": 1,
     "picture": "newPicture.png",
