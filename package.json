@@ -32,6 +32,7 @@
         "fs": "0.0.1-security",
         "lodash": "~4.17.4",
         "method-override": "~2.3.9",
+        "mongoose": "^5.0.7",
         "morgan": "~1.8.2",
         "mysql2": "~1.5.1",
         "passport": "~0.3.2",

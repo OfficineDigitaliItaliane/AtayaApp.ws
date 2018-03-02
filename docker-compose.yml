@@ -1,6 +1,8 @@
 version: "3"
 volumes:
   ruah-db-data:
+      driver: local
+  ruah-dblogin-data:
     driver: local
   ruah-db-test-data:
     driver: local
@@ -11,7 +13,7 @@ services:
     ports:
       - "5000:5000"
     links:
-      - mariadb:mariadb
+      - mongodb:mongodb
     volumes:
         - ./:/app
         - /app/node_modules
@@ -38,7 +40,13 @@ services:
     image: mariadb:latest
     restart: always
     env_file: .env
-    ports:
-      - 3307:3306
     volumes:
-      - ruah-db-data:/var/lib/mysql
+      - ruah-dblogin-data:/var/lib/mysql
+  mongodb:
+    image: mongo
+    restart: always
+    env_file: .env
+    volumes:
+      - ruah-db-data:/data/db
+    ports:
+      - "27017:27017"

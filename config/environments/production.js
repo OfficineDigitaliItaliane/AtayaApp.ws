@@ -2,7 +2,7 @@
 
 module.exports = {
 
-    db:{
+    dblogin:{
         user: process.env.MYSQL_USER,
         pass: process.env.MYSQL_PASSWORD,
         db: process.env.MYSQL_DATABASE,
@@ -12,5 +12,11 @@ module.exports = {
             dialect: "mysql",
             operatorsAliases: false
         }
+    },
+
+    db:{
+        db: process.env.MONGO_DATABASE,
+        host: process.env.MONGO_HOST,
+        port: process.env.MONGO_PORT
     }
 };
