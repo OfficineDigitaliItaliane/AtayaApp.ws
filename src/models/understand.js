@@ -18,6 +18,6 @@ module.exports = new mongoose.Schema({
     video_url: {type: String, required: true},
     audio: {type: String, required: true},
     questions: {type: [understandQuestion], required: true}
-}, { versionKey: false})
+}, { versionKey: false, collection: 'understand'})
 
 
