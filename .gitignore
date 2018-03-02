@@ -9,4 +9,4 @@ venv
 src/npm-debug\.log
 book/*
 .vscode
-
+uploads/

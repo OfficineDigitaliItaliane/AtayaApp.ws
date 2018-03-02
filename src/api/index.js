@@ -8,6 +8,7 @@ const readApi = require('./read')
 const writeApi = require('./write')
 const understandApi = require('./understand')
 const cmsApi = require('./cms')
+const mediaApi = require('./media')
 
 express.use('/docs', Express.static(path.join(__dirname, '../../docs/')))
 express.use('/mock', mockApi)
@@ -16,6 +17,8 @@ express.use('/read', readApi)
 express.use('/write', writeApi)
 express.use('/understand', understandApi)
 express.use('/cms', cmsApi)
+
+express.use('/media', mediaApi)
 
 
 module.exports = express
