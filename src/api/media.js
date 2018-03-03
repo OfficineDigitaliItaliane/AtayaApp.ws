@@ -9,7 +9,7 @@ const auth = new Auth()
 const multer = require('multer')
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, env['imageFolder']) // TODO Fix
+        cb(null, env['imageFolder'])
     },
     filename: function (req, file, cb) {
         let removeExtension = function (filename) {
@@ -24,5 +24,6 @@ const upload = multer({storage: storage})
 const media = require('../controllers/media')
 
 router.post('/upload', auth.authenticate(), upload.single("file"), media.upload)
+router.get('/:name', media.get)
 
 module.exports = router
