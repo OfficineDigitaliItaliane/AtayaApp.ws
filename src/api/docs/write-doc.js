@@ -3,7 +3,7 @@
  */
 
 /**
- * @api {get} /api/write Creates list of writes
+ * @api {get} /api/cms/write Creates list of writes
  * @apiGroup Write
  * @apiUse authHeader
  *
@@ -33,7 +33,7 @@
  */
 
 /**
- * @api {get} /api/write/:id Find write by ID
+ * @api {get} /api/cms/write/:id Find write by ID
  * @apiGroup Write
  * @apiUse authHeader
  *
@@ -51,7 +51,7 @@
  */
 
 /**
- * @api {post} /api/write Add a new write
+ * @api {post} /api/cms/write Add a new write
  * @apiGroup Write
  * @apiUse authHeader
  *
@@ -68,7 +68,7 @@
  */
 
 /**
- * @api {put} /api/write/:id Update an existing write
+ * @api {put} /api/cms/write/:id Update an existing write
  * @apiGroup Write
  * @apiUse authHeader
  *
@@ -85,7 +85,7 @@
  */
 
 /**
- * @api {delete} /api/write/:id Deletes a write
+ * @api {delete} /api/cms/write/:id Deletes a write
  * @apiGroup Write
  * @apiUse authHeader
  */

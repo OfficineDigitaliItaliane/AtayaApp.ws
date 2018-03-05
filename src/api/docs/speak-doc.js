@@ -3,7 +3,7 @@
  */
 
 /**
- * @api {get} /api/speak Creates list of speaks
+ * @api {get} /api/cms/speak Creates list of speaks
  * @apiGroup Speak
  * @apiUse authHeader
  *
@@ -25,7 +25,7 @@
  */
 
 /**
- * @api {get} /api/speak/:id Find speak by ID
+ * @api {get} /api/cms/speak/:id Find speak by ID
  * @apiGroup Speak
  * @apiUse authHeader
  *
@@ -39,7 +39,7 @@
  */
 
 /**
- * @api {post} /api/speak Add a new speak
+ * @api {post} /api/cms/speak Add a new speak
  * @apiGroup Speak
  * @apiUse authHeader
  *
@@ -52,7 +52,7 @@
  */
 
 /**
- * @api {put} /api/speak/:id Update an existing speak
+ * @api {put} /api/cms/speak/:id Update an existing speak
  * @apiGroup Speak
  * @apiUse authHeader
  *
@@ -65,7 +65,7 @@
  */
 
 /**
- * @api {delete} /api/speak/:id Deletes a speak
+ * @api {delete} /api/cms/speak/:id Deletes a speak
  * @apiGroup Speak
  * @apiUse authHeader
  */

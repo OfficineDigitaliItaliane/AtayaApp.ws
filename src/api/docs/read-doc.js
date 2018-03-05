@@ -3,7 +3,7 @@
  */
 
 /**
- * @api {get} /api/read Creates list of reads
+ * @api {get} /api/cms/read Creates list of reads
  * @apiGroup Read
  * @apiUse authHeader
  *
@@ -51,7 +51,7 @@
  */
 
 /**
- * @api {get} /api/read/:id Find read by ID
+ * @api {get} /api/cms/read/:id Find read by ID
  * @apiGroup Read
  * @apiUse authHeader
  *
@@ -78,7 +78,7 @@
  */
 
 /**
- * @api {post} /api/read Add a new read
+ * @api {post} /api/cms/read Add a new read
  * @apiGroup Read
  * @apiUse authHeader
  *
@@ -102,7 +102,7 @@
  */
 
 /**
- * @api {put} /api/read/:id Update an existing read
+ * @api {put} /api/cms/read/:id Update an existing read
  * @apiGroup Read
  * @apiUse authHeader
  *
@@ -126,7 +126,7 @@
  */
 
 /**
- * @api {delete} /api/read/:id Deletes a read
+ * @api {delete} /api/cms/read/:id Deletes a read
  * @apiGroup Read
  * @apiUse authHeader
  */

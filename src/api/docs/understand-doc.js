@@ -3,7 +3,7 @@
  */
 
 /**
- * @api {get} /api/understand Creates list of understand
+ * @api {get} /api/cms/understand Creates list of understand
  * @apiGroup Understand
  * @apiUse authHeader
  *
@@ -105,7 +105,7 @@
 */
 
 /**
- * @api {get} /api/understand/:id Find understand by ID
+ * @api {get} /api/cms/understand/:id Find understand by ID
  * @apiGroup Understand
  * @apiUse authHeader
  *
@@ -159,7 +159,7 @@
  */
 
 /**
- * @api {post} /api/understand Add a new understand
+ * @api {post} /api/cms/understand Add a new understand
  * @apiGroup Understand
  * @apiUse authHeader
  *
@@ -206,7 +206,7 @@
  */
 
 /**
- * @api {put} /api/understand/:id Update an existing understand
+ * @api {put} /api/cms/understand/:id Update an existing understand
  * @apiGroup Understand
  * @apiUse authHeader
  *
@@ -253,7 +253,7 @@
  */
 
 /**
- * @api {delete} /api/understand/:id Deletes a understand
+ * @api {delete} /api/cms/understand/:id Deletes a understand
  * @apiGroup Understand
  * @apiUse authHeader
  */
