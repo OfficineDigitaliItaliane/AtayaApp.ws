@@ -28,7 +28,7 @@
  */
 
 /**
- * @api {get} /api/cms/read Creates list of reads
+ * @api {get} /api/cms/read Get list of reads
  * @apiGroup Read
  * @apiUse authHeader
  *

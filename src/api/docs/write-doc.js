@@ -19,7 +19,7 @@
 */
 
 /**
- * @api {get} /api/cms/write Creates list of writes
+ * @api {get} /api/cms/write Get list of writes
  * @apiGroup Write
  * @apiUse authHeader
  *

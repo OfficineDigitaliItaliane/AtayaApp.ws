@@ -15,7 +15,7 @@
  */
 
 /**
- * @api {get} /api/cms/speak Creates list of speaks
+ * @api {get} /api/cms/speak Get list of speaks
  * @apiGroup Speak
  * @apiUse authHeader
  *

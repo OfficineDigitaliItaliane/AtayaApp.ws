@@ -55,7 +55,7 @@
  */
 
 /**
- * @api {get} /api/cms/understand Creates list of understand
+ * @api {get} /api/cms/understand Get list of understand
  * @apiGroup Understand
  * @apiUse authHeader
  *
