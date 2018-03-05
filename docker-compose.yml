@@ -2,8 +2,6 @@ version: "3"
 volumes:
   ruah-db-data:
       driver: local
-  ruah-dblogin-data:
-    driver: local
   ruah-db-test-data:
     driver: local
 services:
@@ -25,23 +23,16 @@ services:
         - ./:/app
         - /app/node_modules
     links:
-        - mariadbtest:mariadbtest
+        - mongodbtest:mongodbtest
     env_file: .env_test
-  mariadbtest:
-    image: mariadb:latest
-    restart: always
-    env_file: .env_test
-    ports:
-      - 3308:3306
-    volumes:
-      - ruah-db-test-data:/var/lib/mysql
-      - ./database/:/docker-entrypoint-initdb.d
-  mariadb:
-    image: mariadb:latest
+  mongodbtest:
+    image: mongo
     restart: always
     env_file: .env
     volumes:
-      - ruah-dblogin-data:/var/lib/mysql
+      - ruah-db-test-data:/data/db
+    ports:
+      - "27019:27017"
   mongodb:
     image: mongo
     restart: always
