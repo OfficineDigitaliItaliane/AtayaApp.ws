@@ -8,6 +8,7 @@
 {
     "_id": "5a9935e56b3e3800521161b8",
     "unit_id": 1,
+    "title": "title",
     "picture": "picture.png",
     "audio": "audio.mp3"
 }
@@ -23,12 +24,14 @@
     {
         "_id": "5a9935e56b3e3800521161b8",
         "unit_id": 1,
+        "title": "title",
         "picture": "picture.png",
         "audio": "audio.mp3"
     },
     {
         "_id": "5a9935eb6b3e3800521161b9",
         "unit_id": 1,
+        "title": "title2",
         "picture": "picture2.png",
         "audio": "audio2.mp3"
     }
@@ -50,6 +53,7 @@
  * @apiParamExample {json} Request-Example:
  {
      "unit_id": 1,
+     "title": "title",
      "picture": "picture.png",
      "audio": "audio.mp3"
  }
@@ -64,6 +68,7 @@
  * @apiParamExample {json} Request-Example:
 {
     "unit_id": 1,
+    "title": "newTitle",
     "picture": "newPicture.png",
     "audio": "newudio.mp3"
 }

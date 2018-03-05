@@ -48,6 +48,7 @@
 ],
     "_id": "5a994769895e9c001de1ec91",
     "unit_id": 1,
+    "title": "title",
     "video_url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
     "audio": "audio.mp3"
 }
@@ -103,6 +104,7 @@
         ],
         "_id": "5a994769895e9c001de1ec91",
         "unit_id": 1,
+        "title": "title",
         "video_url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
         "audio": "audio.mp3"
     },
@@ -149,6 +151,7 @@
         ],
         "_id": "5a99476f895e9c001de1ec98",
         "unit_id": 1,
+        "title": "title2",
         "video_url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
         "audio": "audio2.mp3"
     }
@@ -170,6 +173,7 @@
  * @apiParamExample {json} Request-Example:
 {
     "unit_id": 1,
+    "title": "title",
     "video_url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
     "audio": "audio.mp3",
     "questions": [
@@ -218,6 +222,7 @@
  * @apiParamExample {json} Request-Example:
 {
     "unit_id": 1,
+    "title": "newTitle",
     "video_url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
     "audio": "newAudio.mp3",
     "questions": [

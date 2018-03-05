@@ -12,6 +12,7 @@
 ],
     "_id": "5a9941671edae8007cc896a9",
     "unit_id": 1,
+    "title": "title",
     "picture": "picture.png",
     "word": "word"
 }
@@ -31,6 +32,7 @@
         ],
         "_id": "5a9941671edae8007cc896a9",
         "unit_id": 1,
+        "title": "title",
         "picture": "picture.png",
         "word": "word"
     },
@@ -41,6 +43,7 @@
         ],
         "_id": "5a9941921edae8007cc896aa",
         "unit_id": 1,
+        "title": "title2",
         "picture": "picture2.png",
         "word": "word2"
     }
@@ -62,6 +65,7 @@
  * @apiParamExample {json} Request-Example:
 {
     "unit_id": 1,
+    "title": "title",
     "picture": "picture.png",
     "word": "word",
     "letters": [
@@ -80,6 +84,7 @@
  * @apiParamExample {json} Request-Example:
 {
     "unit_id": 1,
+    "title": "newTitle",
     "picture": "newPicture.png",
     "word": "newWord",
     "letters": [
