@@ -28,8 +28,8 @@ export async function create(req, res, next){
     try {
         let {body} = req
 
-        await writeHandler.create(body)
-        res.sendStatus(201)
+        let result = await writeHandler.create(body)
+        res.status(201).json(result)
     } catch (err) {
         return next(err.name)
     }
@@ -41,7 +41,8 @@ export async function update(req, res, next){
         let id = req.params.id
 
         await writeHandler.update(id, body)
-        res.sendStatus(200)
+        let row = await writeHandler.findById(id)
+        res.json(row)
     } catch (err) {
         return next(err.name)
     }

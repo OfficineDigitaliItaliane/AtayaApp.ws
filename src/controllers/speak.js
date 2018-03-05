@@ -28,8 +28,8 @@ export async function create(req, res, next){
     try {
         let {body} = req
 
-        await speakHandler.create(body)
-        res.sendStatus(201)
+        let result = await speakHandler.create(body)
+        res.status(201).json(result)
     } catch (err) {
         return next(err.name)
     }
@@ -41,7 +41,8 @@ export async function update(req, res, next){
         let id = req.params.id
 
         await speakHandler.update(id, body)
-        res.sendStatus(200)
+        let row = await speakHandler.findById(id)
+        res.json(row)
     } catch (err) {
         return next(err.name)
     }
