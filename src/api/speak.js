@@ -6,6 +6,7 @@ const auth = new Auth()
 const speak = require('../controllers/speak')
 
 router.get('/', auth.authenticate(), speak.index)
+router.get('/unit_id/:unit_id', auth.authenticate(), speak.findByUnitId)
 router.get('/:id', auth.authenticate(), speak.show)
 router.post('/', auth.authenticate(), speak.create)
 router.put('/:id', auth.authenticate(), speak.update)

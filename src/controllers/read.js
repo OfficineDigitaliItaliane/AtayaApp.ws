@@ -13,6 +13,17 @@ export async function index(req, res, next){
     }
 }
 
+export async function findByUnitId(req, res, next){
+    let unit_id = req.params.unit_id
+
+    try {
+        let rows = await readHandler.findByUnitId(unit_id)
+        res.send(rows)
+    } catch (err) {
+        return next(err.name)
+    }
+}
+
 export async function show(req, res, next){
     try {
         let id = req.params.id

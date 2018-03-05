@@ -26,6 +26,19 @@ export async function findById(id) {
   })
 }
 
+export async function findByUnitId(unit_id) {
+  return new Promise(function (resolve, reject) {
+    speak.find({unit_id: unit_id}).exec(function (error, result) {
+      if (error) {
+        reject(error)
+      }
+      else {
+        resolve(result)
+      }
+    })
+  })
+}
+
 export async function findByIdAndRemove(id) {
   return new Promise(function (resolve, reject) {
     speak.findByIdAndRemove(id).exec(function (error, result) {
