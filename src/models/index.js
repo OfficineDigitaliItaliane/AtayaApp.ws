@@ -19,6 +19,9 @@ var mongoose = require('mongoose');
 
 //Set up default mongoose connection
 var mongoDB = 'mongodb://'+config.db.user+':'+config.db.pass+'@'+config.db.dbconf.host+':'+config.db.dbconf.port+'/'+config.db.db+'?authSource=admin'
+if (config.db.user == '' && config.db.pass == '') {
+    mongoDB = 'mongodb://'+config.db.dbconf.host+':'+config.db.dbconf.port+'/'+config.db.db
+}
 mongoose.connect(mongoDB)
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise
