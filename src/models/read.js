@@ -9,7 +9,7 @@ var readOption = new mongoose.Schema({
 
 module.exports = new mongoose.Schema({
     unit_id: {type: Number, required: true},
-    title: {type: Number, required: true},
+    title: {type: String, required: true},
     picture: {type: String, required: true},
     options: {type: [readOption], required: true}
 }, { versionKey: false, collection: 'read'})
