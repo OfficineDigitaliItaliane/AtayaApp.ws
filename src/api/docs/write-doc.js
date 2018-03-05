@@ -51,6 +51,38 @@
  */
 
 /**
+ * @api {get} /api/cms/write/unit_id/:unit_id Finds writes by unit_id
+ * @apiGroup Write
+ * @apiUse authHeader
+ *
+ @apiSuccessExample {json} Success-Response:
+ [
+ {
+     "letters": [
+         "a",
+         "b"
+     ],
+     "_id": "5a9941671edae8007cc896a9",
+     "unit_id": 1,
+     "title": "title",
+     "picture": "picture.png",
+     "word": "word"
+ },
+ {
+     "letters": [
+         "c",
+         "d"
+     ],
+     "_id": "5a9941921edae8007cc896aa",
+     "unit_id": 1,
+     "title": "title2",
+     "picture": "picture2.png",
+     "word": "word2"
+ }
+ ]
+ */
+
+/**
  * @api {get} /api/cms/write/:id Find write by ID
  * @apiGroup Write
  * @apiUse authHeader

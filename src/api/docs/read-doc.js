@@ -78,6 +78,56 @@
  */
 
 /**
+ * @api {get} /api/cms/read/unit_id/:unit_id Finds reads by unit_id
+ * @apiGroup Read
+ * @apiUse authHeader
+ *
+ @apiSuccessExample {json} Success-Response:
+ [
+ {
+     "options": [
+         {
+             "body": "body",
+             "audio": "audio.mp3",
+             "correct": false,
+             "_id": "5a9946d7895e9c001de1ec74"
+         },
+         {
+             "body": "body2",
+             "audio": "audio2.mp3",
+             "correct": true,
+             "_id": "5a9946d7895e9c001de1ec73"
+         }
+     ],
+     "_id": "5a9946d7895e9c001de1ec75",
+     "unit_id": 1,
+     "title": "title",
+     "picture": "picture.png"
+ },
+ {
+     "options": [
+         {
+             "body": "body",
+             "audio": "audio.mp3",
+             "correct": false,
+             "_id": "5a994797895e9c001de1ec9a"
+         },
+         {
+             "body": "body2",
+             "audio": "audio2.mp3",
+             "correct": true,
+             "_id": "5a994797895e9c001de1ec99"
+         }
+     ],
+     "_id": "5a994797895e9c001de1ec9b",
+     "unit_id": 1,
+     "title": "title2",
+     "picture": "picture2.png"
+ }
+ ]
+ */
+
+/**
  * @api {get} /api/cms/read/:id Find read by ID
  * @apiGroup Read
  * @apiUse authHeader
