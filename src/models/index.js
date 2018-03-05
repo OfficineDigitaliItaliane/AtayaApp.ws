@@ -18,7 +18,7 @@ dblogin.Sequelize = Sequelize // Used for DataTypes
 var mongoose = require('mongoose');
 
 //Set up default mongoose connection
-var mongoDB = 'mongodb://'+config.db.host+':'+config.db.port+'/'+config.db.db
+var mongoDB = 'mongodb://'+config.db.user+':'+config.db.pass+'@'+config.db.dbconf.host+':'+config.db.dbconf.port+'/'+config.db.db+'?authSource=admin'
 mongoose.connect(mongoDB)
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise

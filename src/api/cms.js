@@ -7,5 +7,6 @@ const auth = new Auth()
 const user = require('../controllers/users')
 
 router.post('/login', user.login)
+router.post('/signup', user.signup)
 
 module.exports = router

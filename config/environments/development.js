@@ -15,9 +15,13 @@ module.exports = {
     },
 
     db:{
-        db: process.env.MONGO_DATABASE,
-        host: process.env.MONGO_HOST,
-        port: process.env.MONGO_PORT
+        user: process.env.MONGO_INITDB_ROOT_USERNAME,
+        pass: process.env.MONGO_INITDB_ROOT_PASSWORD,
+        db: process.env.MONGO_INITDB_DATABASE,
+        dbconf:{
+            host: process.env.MONGO_HOST,
+            port: process.env.MONGO_PORT
+        }
     },
 
     imageFolder: process.env.IMAGE_FOLDER
