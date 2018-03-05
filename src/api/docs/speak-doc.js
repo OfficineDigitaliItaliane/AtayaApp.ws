@@ -3,6 +3,17 @@
  */
 
 /**
+ * @apiDefine singleSpeakSuccessResponse
+ @apiSuccessExample {json} Success-Response:
+{
+    "_id": "5a9935e56b3e3800521161b8",
+    "unit_id": 1,
+    "picture": "picture.png",
+    "audio": "audio.mp3"
+}
+ */
+
+/**
  * @api {get} /api/cms/speak Creates list of speaks
  * @apiGroup Speak
  * @apiUse authHeader
@@ -28,14 +39,7 @@
  * @api {get} /api/cms/speak/:id Find speak by ID
  * @apiGroup Speak
  * @apiUse authHeader
- *
- @apiSuccessExample {json} Success-Response:
-{
-    "_id": "5a9935e56b3e3800521161b8",
-    "unit_id": 1,
-    "picture": "picture.png",
-    "audio": "audio.mp3"
-}
+ * @apiUse singleSpeakSuccessResponse
  */
 
 /**
@@ -49,6 +53,7 @@
      "picture": "picture.png",
      "audio": "audio.mp3"
  }
+ * @apiUse singleSpeakSuccessResponse
  */
 
 /**
@@ -62,6 +67,7 @@
     "picture": "newPicture.png",
     "audio": "newudio.mp3"
 }
+ * @apiUse singleSpeakSuccessResponse
  */
 
 /**

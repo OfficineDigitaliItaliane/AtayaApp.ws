@@ -3,6 +3,30 @@
  */
 
 /**
+ * @apiDefine singleReadSuccessResponse
+ @apiSuccessExample {json} Success-Response:
+{
+    "options": [
+    {
+        "body": "body",
+        "audio": "audio.mp3",
+        "correct": false,
+        "_id": "5a9946d7895e9c001de1ec74"
+    },
+    {
+        "body": "body2",
+        "audio": "audio2.mp3",
+        "correct": true,
+        "_id": "5a9946d7895e9c001de1ec73"
+    }
+],
+    "_id": "5a9946d7895e9c001de1ec75",
+    "unit_id": 1,
+    "picture": "picture.png"
+}
+ */
+
+/**
  * @api {get} /api/cms/read Creates list of reads
  * @apiGroup Read
  * @apiUse authHeader
@@ -54,27 +78,7 @@
  * @api {get} /api/cms/read/:id Find read by ID
  * @apiGroup Read
  * @apiUse authHeader
- *
- @apiSuccessExample {json} Success-Response:
-{
-    "options": [
-    {
-        "body": "body",
-        "audio": "audio.mp3",
-        "correct": false,
-        "_id": "5a9946d7895e9c001de1ec74"
-    },
-    {
-        "body": "body2",
-        "audio": "audio2.mp3",
-        "correct": true,
-        "_id": "5a9946d7895e9c001de1ec73"
-    }
-],
-    "_id": "5a9946d7895e9c001de1ec75",
-    "unit_id": 1,
-    "picture": "picture.png"
-}
+ * @apiUse singleReadSuccessResponse
  */
 
 /**
@@ -99,6 +103,7 @@
     }
 ]
 }
+ * @apiUse singleReadSuccessResponse
  */
 
 /**
@@ -123,6 +128,7 @@
     }
 ]
 }
+ * @apiUse singleReadSuccessResponse
  */
 
 /**

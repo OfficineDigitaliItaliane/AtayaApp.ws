@@ -3,6 +3,21 @@
  */
 
 /**
+ * @apiDefine singleWriteSuccessResponse
+ @apiSuccessExample {json} Success-Response:
+{
+    "letters": [
+    "a",
+    "b"
+],
+    "_id": "5a9941671edae8007cc896a9",
+    "unit_id": 1,
+    "picture": "picture.png",
+    "word": "word"
+}
+*/
+
+/**
  * @api {get} /api/cms/write Creates list of writes
  * @apiGroup Write
  * @apiUse authHeader
@@ -36,18 +51,7 @@
  * @api {get} /api/cms/write/:id Find write by ID
  * @apiGroup Write
  * @apiUse authHeader
- *
- @apiSuccessExample {json} Success-Response:
-{
-    "letters": [
-    "a",
-    "b"
-],
-    "_id": "5a9941671edae8007cc896a9",
-    "unit_id": 1,
-    "picture": "picture.png",
-    "word": "word"
-}
+ * @apiUse singleWriteSuccessResponse
  */
 
 /**
@@ -65,6 +69,7 @@
     "b"
 ]
 }
+ * @apiUse singleWriteSuccessResponse
  */
 
 /**
@@ -82,6 +87,7 @@
     "b"
 ]
 }
+ * @apiUse singleWriteSuccessResponse
  */
 
 /**

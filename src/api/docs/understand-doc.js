@@ -3,6 +3,57 @@
  */
 
 /**
+ * @apiDefine singleUnderstandSuccessResponse
+ @apiSuccessExample {json} Success-Response:
+{
+    "questions": [
+    {
+        "answers": [
+            {
+                "body": "body",
+                "audio": "audio.mp3",
+                "correct": false,
+                "_id": "5a994769895e9c001de1ec8f"
+            },
+            {
+                "body": "body2",
+                "audio": "audio2.mp3",
+                "correct": true,
+                "_id": "5a994769895e9c001de1ec8e"
+            }
+        ],
+        "body": "qBody",
+        "audio": "qAudio.mp3",
+        "_id": "5a994769895e9c001de1ec90"
+    },
+    {
+        "answers": [
+            {
+                "body": "body",
+                "audio": "audio.mp3",
+                "correct": false,
+                "_id": "5a994769895e9c001de1ec8c"
+            },
+            {
+                "body": "body2",
+                "audio": "audio2.mp3",
+                "correct": true,
+                "_id": "5a994769895e9c001de1ec8b"
+            }
+        ],
+        "body": "q2Body",
+        "audio": "q2Audio.mp3",
+        "_id": "5a994769895e9c001de1ec8d"
+    }
+],
+    "_id": "5a994769895e9c001de1ec91",
+    "unit_id": 1,
+    "video_url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
+    "audio": "audio.mp3"
+}
+ */
+
+/**
  * @api {get} /api/cms/understand Creates list of understand
  * @apiGroup Understand
  * @apiUse authHeader
@@ -108,54 +159,7 @@
  * @api {get} /api/cms/understand/:id Find understand by ID
  * @apiGroup Understand
  * @apiUse authHeader
- *
- @apiSuccessExample {json} Success-Response:
-{
-    "questions": [
-    {
-        "answers": [
-            {
-                "body": "body",
-                "audio": "audio.mp3",
-                "correct": false,
-                "_id": "5a994769895e9c001de1ec8f"
-            },
-            {
-                "body": "body2",
-                "audio": "audio2.mp3",
-                "correct": true,
-                "_id": "5a994769895e9c001de1ec8e"
-            }
-        ],
-        "body": "qBody",
-        "audio": "qAudio.mp3",
-        "_id": "5a994769895e9c001de1ec90"
-    },
-    {
-        "answers": [
-            {
-                "body": "body",
-                "audio": "audio.mp3",
-                "correct": false,
-                "_id": "5a994769895e9c001de1ec8c"
-            },
-            {
-                "body": "body2",
-                "audio": "audio2.mp3",
-                "correct": true,
-                "_id": "5a994769895e9c001de1ec8b"
-            }
-        ],
-        "body": "q2Body",
-        "audio": "q2Audio.mp3",
-        "_id": "5a994769895e9c001de1ec8d"
-    }
-],
-    "_id": "5a994769895e9c001de1ec91",
-    "unit_id": 1,
-    "video_url": "https://www.youtube.com/watch?v=UF8uR6Z6KLc",
-    "audio": "audio.mp3"
-}
+ * @apiUse singleUnderstandSuccessResponse
  */
 
 /**
@@ -203,6 +207,7 @@
     }
 ]
 }
+ * @apiUse singleUnderstandSuccessResponse
  */
 
 /**
@@ -250,6 +255,7 @@
     }
 ]
 }
+ * @apiUse singleUnderstandSuccessResponse
  */
 
 /**
