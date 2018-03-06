@@ -20,7 +20,7 @@ export async function getBook(req, res, next){
         var filestream = fs.createReadStream(file)
         filestream.pipe(res)
     } catch (err) {
-        return next(err.name)
+        return next(err)
     }
 }
 
@@ -29,13 +29,13 @@ export async function isUpdate(req, res, next){
         var result = req.params.result ? false : true
         return res.status(200).send(result).end()
     }catch(err){
-        return next(err.name)
+        return next(err)
     }
 }
 
 export async function createZip(req, res, next){
     try{
     }catch(err){
-        return next(err.name)
+        return next(err)
     }
 }

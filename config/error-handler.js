@@ -6,11 +6,14 @@ export default (app) => {
     logger.error(errorString)
     // If error contains a code, then returns code directly as status. Else check error type
     let code = parseInt(err)
+    if (!code) {
+      code = parseInt(err.code)
+    }
     if (code) {
       res.sendStatus(code)
     } else {
-      switch(err) {
-        case 'SequelizeValidationError':
+      switch(err.name) {
+        case 'ValidationError':
           res.sendStatus(400)
           break;
         default:
@@ -30,7 +33,15 @@ function getErrorString(req, res, err) {
   if (Object.keys(req.body).length !== 0) {
     str += '\n' + JSON.stringify(req.body) + '\n'
   }
-  str += '\nError: \n'
-  str += err
+  str += '\nError:'
+  if (!(err instanceof Object)) {
+    str += '\nName: ' + err
+  }
+  else {
+    str += '\nName: ' + err.name
+    str += '\nCode: ' + err.code
+    str += '\nMessage: ' + err.message
+    str += '\nStack Trace: ' + err.stack
+  }
   return str
 }

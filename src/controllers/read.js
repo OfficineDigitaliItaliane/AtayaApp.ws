@@ -9,7 +9,7 @@ export async function index(req, res, next){
         let rows = await readHandler.find()
         res.send(rows)
     } catch (err) {
-        return next(err.name)
+        return next(err)
     }
 }
 
@@ -20,7 +20,7 @@ export async function findByUnitId(req, res, next){
         let rows = await readHandler.findByUnitId(unit_id)
         res.send(rows)
     } catch (err) {
-        return next(err.name)
+        return next(err)
     }
 }
 
@@ -31,7 +31,7 @@ export async function show(req, res, next){
         let row = await readHandler.findById(id)
         res.send(row)
     } catch (err) {
-        return next(err.name)
+        return next(err)
     }
 }
 
@@ -42,7 +42,7 @@ export async function create(req, res, next){
         let result = await readHandler.create(body)
         res.status(201).json(result)
     } catch (err) {
-        return next(err.name)
+        return next(err)
     }
 }
 
@@ -55,7 +55,7 @@ export async function update(req, res, next){
         let row = await readHandler.findById(id)
         res.json(row)
     } catch (err) {
-        return next(err.name)
+        return next(err)
     }
 }
 
@@ -66,6 +66,6 @@ export async function destroy(req, res, next){
         await readHandler.findByIdAndRemove(id)
         res.sendStatus(200)
     } catch (err) {
-        return next(err.name)
+        return next(err)
     }
 }
