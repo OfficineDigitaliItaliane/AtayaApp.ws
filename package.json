@@ -7,6 +7,9 @@
         "title": "Ruah Back-end",
         "sampleUrl": ""
     },
+    "nodemonConfig": {
+        "ignore": ["book/*"]
+    },
     "main":"index.js",
     "scripts":{
         "start": "node index.js",

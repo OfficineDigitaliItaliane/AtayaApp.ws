@@ -5,11 +5,12 @@
 import * as env from '../../config/environments'
 import uuidv4 from 'uuid/v4'
 import fs from 'fs'
-import archiver from 'archiver'
 import * as readHandler from '../handlers/read-handler'
 import * as speakHandler from '../handlers/speak-handler'
 import * as writeHandler from '../handlers/write-handler'
 import * as understandHandler from '../handlers/understand-handler'
+import * as fileSystem from '../components/file-system'
+import * as zip from '../components/zip'
 
 function uuid() {
   return uuidv4()
@@ -19,122 +20,74 @@ function getBookFolder() {
   return __dirname + '/../../book'
 }
 
-export async function writeFile(fullFilePath, string) {
-  return new Promise(function (resolve, reject) {
-    fs.writeFile(fullFilePath, string, function(error) {
-      if (error) {
-        reject(error)
-      }
-      else {
-        resolve()
-      }
-    })
-  })
-}
-
-export async function readFile(fullFilePath) {
-  return new Promise(function (resolve, reject) {
-    fs.readFile(fullFilePath, function(error, result) {
-      if (error) {
-        reject(error)
-      }
-      else {
-        resolve(result)
-      }
-    })
-  })
-}
-
-export async function readJsonFile(fullFilePath) {
-  let result = await readFile(fullFilePath)
-  return JSON.parse(result)
+export function getZipFilePath() {
+  return getBookFolder() + '/book.zip'
 }
 
 export async function getBookTimestamp() {
   let bookFolder = getBookFolder()
   let fullFilePath = bookFolder + '/book.json'
-  let result = await readJsonFile(fullFilePath)
+  let result = await fileSystem.readJsonFile(fullFilePath)
   return result.timestamp
-}
-
-export function getZipFilePath() {
-  return getBookFolder() + '/book.zip'
 }
 
 export async function createZip() {
   let bookFolder = getBookFolder()
   let fullFilePath = bookFolder + '/book.zip'
-
-  // create a file to stream archive data to.
-  var output = fs.createWriteStream(fullFilePath);
-  var archive = archiver('zip', {
-    zlib: { level: 9 } // Sets the compression level.
-  });
-
-// listen for all archive data to be written
-// 'close' event is fired only when a file descriptor is involved
-  output.on('close', function() {
-    console.log(archive.pointer() + ' total bytes');
-    console.log('archiver has been finalized and the output file descriptor has closed.');
-  });
-
-// This event is fired when the data source is drained no matter what was the data source.
-// It is not part of this library but rather from the NodeJS Stream API.
-// @see: https://nodejs.org/api/stream.html#stream_event_end
-  output.on('end', function() {
-    console.log('Data has been drained');
-  });
-
-// good practice to catch warnings (ie stat failures and other non-blocking errors)
-  archive.on('warning', function(err) {
-    if (err.code === 'ENOENT') {
-      // log warning
-    } else {
-      // throw error
-      throw err;
-    }
-  });
-
-// good practice to catch this error explicitly
-  archive.on('error', function(err) {
-    throw err;
-  });
-
-// pipe archive data to the file
-  archive.pipe(output);
-
-  // append a file from string
+  let files = []
 
   let jsonObj = await getJsonObj()
   let mediaArray = jsonObj.files
   delete jsonObj['files']
 
-  let jsonFileName = 'book.json'
-  let jsonPath = bookFolder + '/' + jsonFileName
-  await writeFile(jsonPath, JSON.stringify(jsonObj))
-
-  archive.file(jsonPath, { name: jsonFileName })
-
-  // mediaArray.push('iTunesArtwork_1520271116713.png')
+  let jsonPath = bookFolder + '/' + 'book.json'
+  await fileSystem.writeFile(jsonPath, JSON.stringify(jsonObj))
+  files.push(jsonPath)
 
   for (var i = 0; i < mediaArray.length; i++) {
-    let filename = mediaArray[i]
-    archive.file(env['imageFolder'] + '/' + filename, { name: filename })
+    files.push(env['imageFolder'] + '/' + mediaArray[i])
   }
 
-  // finalize the archive (ie we are done appending files but streams have to finish yet)
-// 'close', 'end' or 'finish' may be fired right after calling this method so register to them beforehand
-  archive.finalize();
+  zip.create(fullFilePath, files)
 }
 
 export async function getJsonObj() {
   let files = []
 
-  let reads = await readHandler.find()
-  let speaks = await speakHandler.find()
-  let writes = await writeHandler.find()
-  let understand = await understandHandler.find()
+  let speakObj = await getSpeakObj()
+  let speaks = speakObj.speaks
+  files.concat(speakObj.files)
 
+  let writeObj = await getWriteObj()
+  let writes = writeObj.speaks
+  files.concat(writeObj.files)
+
+  let readObj = await getReadObj()
+  let reads = readObj.reads
+  files.concat(readObj.files)
+
+  let understandObj = await getUnderstandObj()
+  let understand = understandObj.understand
+  files.concat(understandObj.files)
+
+  files = files.filter((v, i, a) => a.indexOf(v) === i)
+
+  let result = {
+    timestamp: (new Date).getTime(),
+    understand: understand,
+    read: reads,
+    speak: speaks,
+    write: writes,
+    files: files
+  }
+
+  return result
+}
+
+export async function getSpeakObj() {
+  let files = []
+
+  let speaks = await speakHandler.find()
   speaks = speaks.map((row) => {
     let speak = row.toObject()
     speak.id = speak._id
@@ -144,6 +97,13 @@ export async function getJsonObj() {
     return speak
   })
 
+  return {speaks: speaks, files: files}
+}
+
+export async function getWriteObj() {
+  let files = []
+
+  let writes = await writeHandler.find()
   writes = writes.map((row) => {
     let write = row.toObject()
     write.id = write._id
@@ -163,6 +123,13 @@ export async function getJsonObj() {
     return write
   })
 
+  return {writes: writes, files: files}
+}
+
+export async function getReadObj() {
+  let files = []
+
+  let reads = await readHandler.find()
   reads = reads.map((row) => {
     let read = row.toObject()
     read.id = read._id
@@ -184,6 +151,13 @@ export async function getJsonObj() {
     return read
   })
 
+  return {reads: reads, files: files}
+}
+
+export async function getUnderstandObj() {
+  let files = []
+
+  let understand = await understandHandler.find()
   understand = understand.map((row) => {
     let understandSingle = row.toObject()
     understandSingle.id = understandSingle._id
@@ -219,16 +193,5 @@ export async function getJsonObj() {
     return understandSingle
   })
 
-  files = files.filter((v, i, a) => a.indexOf(v) === i)
-
-  let result = {
-    timestamp: (new Date).getTime(),
-    understand: understand,
-    read: reads,
-    speak: speaks,
-    write: writes,
-    files: files
-  }
-
-  return result
+  return {understand: understand, files: files}
 }
