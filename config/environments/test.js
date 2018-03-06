@@ -24,5 +24,7 @@ module.exports = {
         }
     },
 
-    imageFolder: process.env.IMAGE_FOLDER
+    imageFolder: process.env.IMAGE_FOLDER,
+
+    apiKey: process.env.API_KEY
 };
