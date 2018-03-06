@@ -26,5 +26,11 @@ module.exports = {
 
     imageFolder: process.env.IMAGE_FOLDER,
 
-    apiKey: process.env.API_KEY
+    apiKey: process.env.API_KEY,
+
+    slack:{
+        enabled: process.env.SLACK_ENABLED == 'true',
+        url: process.env.SLACK_URL,
+        username: process.env.SLACK_USERNAME,
+    }
 };

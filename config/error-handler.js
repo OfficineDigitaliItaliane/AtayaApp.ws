@@ -1,8 +1,20 @@
+import slack from 'slack-incoming-webhook'
+import config from '../config/environments'
 import logger from './logger'
+
+function sendSlackMessage(errorString) {
+  if (config.slack.enabled) {
+    slack(errorString, {
+      url: config.slack.url,
+      username: config.slack.username
+    })
+  }
+}
 
 export default (app) => {
   app.use(function (err, req, res, next) {
     let errorString = getErrorString(req, res, err)
+    sendSlackMessage(errorString)
     logger.error(errorString)
     // If error contains a code, then returns code directly as status. Else check error type
     let code = parseInt(err)
