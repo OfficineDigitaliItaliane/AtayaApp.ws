@@ -32,5 +32,9 @@ module.exports = {
         enabled: process.env.SLACK_ENABLED == 'true',
         url: process.env.SLACK_URL,
         username: process.env.SLACK_USERNAME,
+    },
+
+    cors: {
+        origin: process.env.CORS_ORIGIN
     }
 };
