@@ -11,7 +11,7 @@ import fs from 'fs'
  */
 export async function getBook(req, res, next){
     try {
-        var file = path.normalize(__dirname + '/../..') + '/book/book.zip'
+        var file = path.normalize(__dirname + '/../..') + '/mockbook/book.zip'
         var filename = path.basename(file)
         var mimetype = mime.lookup(file)
         res.setHeader('Content-Disposition', 'attachment; filename='+filename)
