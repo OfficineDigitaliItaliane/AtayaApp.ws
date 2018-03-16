@@ -14,7 +14,8 @@
     "unit_id": 1,
     "title": "title",
     "picture": "picture.png",
-    "word": "word"
+    "word": "word",
+    "audio": "audio.mp3"
 }
 */
 
@@ -34,6 +35,7 @@
         "unit_id": 1,
         "title": "title",
         "picture": "picture.png",
+        "audio": "audio.mp3",
         "word": "word"
     },
     {
@@ -45,6 +47,7 @@
         "unit_id": 1,
         "title": "title2",
         "picture": "picture2.png",
+        "audio": "audio2.mp3",
         "word": "word2"
     }
 ]
@@ -66,6 +69,7 @@
      "unit_id": 1,
      "title": "title",
      "picture": "picture.png",
+     "audio": "audio.mp3",
      "word": "word"
  },
  {
@@ -77,6 +81,7 @@
      "unit_id": 1,
      "title": "title2",
      "picture": "picture2.png",
+     "audio": "audio2.mp3",
      "word": "word2"
  }
  ]
@@ -99,6 +104,7 @@
     "unit_id": 1,
     "title": "title",
     "picture": "picture.png",
+    "audio": "audio.mp3",
     "word": "word",
     "letters": [
     "a",
@@ -118,6 +124,7 @@
     "unit_id": 1,
     "title": "newTitle",
     "picture": "newPicture.png",
+    "audio": "newAudio.mp3",
     "word": "newWord",
     "letters": [
     "a",
