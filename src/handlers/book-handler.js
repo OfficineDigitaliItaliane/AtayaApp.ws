@@ -48,7 +48,7 @@ export async function createZip() {
     files.push(env['imageFolder'] + '/' + mediaArray[i])
   }
 
-  zip.create(fullFilePath, files)
+  await zip.create(fullFilePath, files)
 }
 
 export async function getJsonObj() {
@@ -56,19 +56,19 @@ export async function getJsonObj() {
 
   let speakObj = await getSpeakObj()
   let speaks = speakObj.speaks
-  files.concat(speakObj.files)
+  speakObj.files.map((file) => files.push(file))
 
   let writeObj = await getWriteObj()
-  let writes = writeObj.speaks
-  files.concat(writeObj.files)
+  let writes = writeObj.writes
+  writeObj.files.map((file) => files.push(file))
 
   let readObj = await getReadObj()
   let reads = readObj.reads
-  files.concat(readObj.files)
+  readObj.files.map((file) => files.push(file))
 
   let understandObj = await getUnderstandObj()
   let understand = understandObj.understand
-  files.concat(understandObj.files)
+  understandObj.files.map((file) => files.push(file))
 
   files = files.filter((v, i, a) => a.indexOf(v) === i)
 
