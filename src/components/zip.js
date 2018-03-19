@@ -43,5 +43,5 @@ export async function create(fullFilePath, files) {
         archive.file(file, { name: filename })
     }
 
-    archive.finalize();
+    await archive.finalize();
 }
