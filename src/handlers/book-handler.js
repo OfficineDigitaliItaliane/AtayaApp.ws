@@ -119,6 +119,7 @@ export async function getWriteObj() {
     }
 
     files.push(write.picture)
+    files.push(write.audio)
 
     return write
   })
