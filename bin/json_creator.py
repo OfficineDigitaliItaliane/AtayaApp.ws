@@ -2,17 +2,14 @@ from faker import Faker
 import json
 import random
 import os
+import urllib.request
+import shutil
+import time
 
-_AUDIO = [
-    'answer1.mp3',
-    'answer2.mp3',
-    'understand1.mp3',
-    'understand2.mp3',
-    'audio.mp3',
-    'speak.mp3',
-    'read.mp3',
-    'write.mp3'
-]
+_BUCKET_URL = 'https://ruah-book.s3-eu-west-1.amazonaws.com'
+
+_AUDIO_DIR = '/audio/'
+_PICTURE_DIR = '/images/'
 
 _VIDEO = [
     'https://youtu.be/x-Bpoj5fZr0',
@@ -25,31 +22,33 @@ _VIDEO = [
     'https://youtu.be/Dpa53jyVgmY'
 ]
 
-_PICTURE = [
-    'image-1.jpg',
-    'image-2.jpg',
-    'image-3.jpg',
-    'image-4.jpg',
-    'image-5.jpg',
-    'image-6.jpg',
-    '1.jpg',
-    '2.jpg',
-    '3.jpg',
-    '4.jpg',
-    '5.jpg'
-]
+def __get_remote_file(file_type):
+    if file_type == 'audio':
+        file_name = "{}.mp3".format(random.randrange(1, 11))
+        url = _BUCKET_URL+_AUDIO_DIR+file_name
+    else:
+        file_name = "{}.jpg".format(random.randrange(1, 11))
+        url = _BUCKET_URL+_PICTURE_DIR+file_name
+    if not os.path.isfile('../book/'+file_name):
+        with urllib.request.urlopen(url) as response, open("../book/"+file_name, 'wb') as out_file:
+            shutil.copyfileobj(response, out_file)
+    return file_name
 
+def __get_id():
+    time.sleep(1)
+    seed = random.randrange(1000, 11456)
+    return int(time.time()) + seed
 
 def understand():
     understand = []
     for i in range(0, 10):
-        id = random.randrange(1, 1000)
+        id = __get_id()
         questions, answers = __questions(id)
         understand.append({
             "id":id,
             "unit_id":i,
             "video_url":_VIDEO[random.randrange(0, len(_VIDEO))],
-            "audio":_AUDIO[random.randrange(0, len(_AUDIO))],
+            "audio":__get_remote_file('audio'),
             "questions":questions,
             "answers":answers
         })
@@ -60,16 +59,16 @@ def __questions(section_id):
     q = []
     a = []
     for _ in range(10):
-        idq = random.randrange(1, 1000)
+        idq = __get_id()
         q.append({
             'id':idq,
             'section_id':section_id,
             'body':fake.sentence(),
-            'audio':_AUDIO[random.randrange(0, len(_AUDIO))]
+            'audio':__get_remote_file('audio')
         })
         is_correct = False
         for _ in range(10):
-            ida = random.randrange(1001, 2000)
+            ida = __get_id()
             if is_correct:
                 correct = False
             else:
@@ -79,7 +78,7 @@ def __questions(section_id):
                 'id': ida,
                 'question_id':idq,
                 'body':fake.sentence(),
-                'audio':_AUDIO[random.randrange(0, len(_AUDIO))],
+                'audio':__get_remote_file('audio'),
                 'correct':correct
             })
     return q, a
@@ -89,21 +88,21 @@ def speak():
     for i in range(0, 10):
         for _ in range(10):
             speak.append({
-                'id':random.randrange(0, 100),
+                'id':__get_id(),
                 'unit_id':i,
-                'picture':_PICTURE[random.randrange(0, len(_PICTURE))],
-                'audio':_AUDIO[random.randrange(0, len(_AUDIO))],
+                'picture':__get_remote_file('image'),
+                'audio':__get_remote_file('audio'),
             })
     return speak
 
 def read():
     read = []
     for i in range(0, 10):
-        id = random.randrange(0, 100)
+        id = __get_id()
         read.append({
             'id': id,
             'unit_id':i,
-            'picture':_PICTURE[random.randrange(0, len(_PICTURE))],
+            'picture':__get_remote_file('image'),
             'options':_options(id)
         })
     return read
@@ -119,10 +118,10 @@ def _options(id):
             correct = bool(random.getrandbits(1))
             is_correct = correct
         options.append({
-            'id':random.randrange(101, 200),
+            'id':__get_id(),
             'read_id':id,
             'body':fake.word(ext_word_list=None),
-            'audio':_AUDIO[random.randrange(0, len(_AUDIO))],
+            'audio':__get_remote_file('audio'),
             'correct':correct
         })
     return options
@@ -132,13 +131,13 @@ def write():
     write = []
     for i in range(0, 10):
         for _ in range(10):
-            id = random.randrange(0, 100)
+            id = __get_id()
             word = fake.word(ext_word_list=None)
             if i <= 5:
                 write.append({
                     'id': id,
                     'unit_id': i,
-                    'picture': _PICTURE[random.randrange(0, len(_PICTURE))],
+                    'picture': __get_remote_file('image'),
                     'word': word,
                     'type': 'basic',
                     'letters':_letters(word)
@@ -147,7 +146,7 @@ def write():
                 write.append({
                     'id': id,
                     'unit_id': i,
-                    'picture': _PICTURE[random.randrange(0, len(_PICTURE))],
+                    'picture': __get_remote_file('image'),
                     'word': word,
                     'type': 'advanced'
                 })
@@ -155,12 +154,21 @@ def write():
 
 def _letters(word):
     letters = []
-    for key, value in enumerate(word):
-        letters.append({
-            'id':random.randrange(1, 1000),
-            'text':value
-        })
+    for key, value in enumerate(set(word)):
+        if value not in letters:
+            letters.append({
+                'id': 1000 + key,
+                'text': value,
+                'order': _get_occurences(word, value)
+            })
     return letters
+
+def _get_occurences(word, letter):
+    occ = []
+    for key, value in enumerate(word):
+        if letter == value:
+            occ.append(key)
+    return occ
 
 def create_file(book):
     with open('../book/book.json', 'w+') as bf:

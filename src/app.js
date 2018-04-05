@@ -10,8 +10,6 @@ require('./routes').default(app)
 
 require('../config/error-handler').default(app)
 
-app.get('/health', (req, res) => res.send('ok'))
-
 server.listen(config.port, () => {
   logger.info(`Express server listening on ${config.port}, in ${config.env} mode`)
 })

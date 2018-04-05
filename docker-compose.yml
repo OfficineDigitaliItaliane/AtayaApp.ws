@@ -1,6 +1,8 @@
 version: "3"
 volumes:
   ruah-db-data:
+      driver: local
+  ruah-db-test-data:
     driver: local
 services:
   web:
@@ -9,17 +11,33 @@ services:
     ports:
       - "5000:5000"
     links:
-      - mariadb:mariadb
+      - mongodb:mongodb
     volumes:
         - ./:/app
         - /app/node_modules
     env_file: .env
     entrypoint: npm run-script run
-  mariadb:
-    image: mariadb:latest
+  testweb:
+    build: .
+    volumes:
+        - ./:/app
+        - /app/node_modules
+    links:
+        - mongodbtest:mongodbtest
+    env_file: .env_test
+  mongodbtest:
+    image: mongo
     restart: always
     env_file: .env
-    ports:
-      - 3307:3306
     volumes:
-      - ruah-db-data:/var/lib/mysql
+      - ruah-db-test-data:/data/db
+    ports:
+      - "27019:27017"
+  mongodb:
+    image: mongo
+    restart: always
+    env_file: .env
+    volumes:
+      - ruah-db-data:/data/db
+    ports:
+      - "27017:27017"

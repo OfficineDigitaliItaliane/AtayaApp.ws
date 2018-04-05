@@ -7,7 +7,7 @@ import winstonDailyRotate from 'winston-daily-rotate-file'
 
 const env = process.env.NODE_ENV
 const tsFormat = () => (new Date()).toLocaleTimeString()
-const logDir = path.normalize(__dirname + '/..') + 'logs'
+const logDir = path.join(__dirname + '/../logs')
 winston.emitErrs = true
 
 if (!fs.existsSync(logDir)) {
@@ -16,17 +16,25 @@ if (!fs.existsSync(logDir)) {
 
 const logger = new (winston.Logger)({
   transports: [
-    new (winstonDailyRotate)({
-      level: 'development' === env ? 'debug' : 'info',
-      filename: path.join(logDir, '-messages.log'),
+    new winstonDailyRotate ({
+      level: 'info',
+      prepend: true,
+      filename: path.join(logDir, 'queryPerf.log'),
+      handleExceptions: false,
+      json: false,
+      timestamp: tsFormat
+    }),
+    new (winston.transports.File)({
+      level: 'development' === env ? 'silly' : 'info',
+      filename: path.join(logDir, 'messages.log'),
       handleExceptions: true,
       timestamp: tsFormat,
       json: true,
       datePattern: 'yyyy-MM-dd',
       prepend: true
     }),
-    new (winston.transports.Console)({
-      level: 'development' === env ? 'debug' : 'info',
+    new winston.transports.Console ({
+      level: 'development' === env ? 'silly' : 'info',
       handleExceptions: true,
       json: false,
       timestamp: tsFormat,
@@ -38,7 +46,7 @@ const logger = new (winston.Logger)({
 
 logger.stream = {
   write: (message, encoding) => {
-    logger.info(message)
+    logger.silly(message)
   }
 }
 

@@ -7,6 +7,9 @@
         "title": "Ruah Back-end",
         "sampleUrl": ""
     },
+    "nodemonConfig": {
+        "ignore": ["book/*"]
+    },
     "main":"index.js",
     "scripts":{
         "start": "node index.js",
@@ -32,7 +35,9 @@
         "fs": "0.0.1-security",
         "lodash": "~4.17.4",
         "method-override": "~2.3.9",
+        "mongoose": "^5.0.7",
         "morgan": "~1.8.2",
+        "multer": "1.3.0",
         "mysql2": "~1.5.1",
         "passport": "~0.3.2",
         "passport-jwt": "^3.0.0",
@@ -40,9 +45,13 @@
         "path": "^0.12.7",
         "request": "^2.83.0",
         "sequelize": "~4.29.3",
-        "sequelize-cli": "~3.2.0",
+        "sequelize-cli": "~2.8.0",
         "winston": "~2.4.0",
-        "winston-daily-rotate-file": "~1.7.2"
+        "winston-daily-rotate-file": "~1.7.2",
+        "cors": "~2.8.4",
+        "archiver": "2.1.1",
+        "uuid": "3.2.1",
+        "slack-incoming-webhook": "1.1.0"
     },
     "devDependencies": {
         "chai": "~4.1.1",
