@@ -2,18 +2,9 @@
 
 import fs from 'fs'
 import path from 'path'
-import Sequelize from 'sequelize'
 import config from '../../config/environments'
 
 const basename = path.basename(module.filename)
-const dblogin = {}
-
-const sequelize = new Sequelize(config.dblogin.db, config.dblogin.user, config.dblogin.pass, config.dblogin.dbconf)
-
-
-
-dblogin.sequelize = sequelize // Used for transactions and query
-dblogin.Sequelize = Sequelize // Used for DataTypes
 
 var mongoose = require('mongoose');
 
@@ -34,13 +25,8 @@ db['speak'] = mongoose.model('speak', require(path.join(__dirname, 'speak.js')) 
 db['write'] = mongoose.model('write', require(path.join(__dirname, 'write.js')) )
 db['read'] = mongoose.model('read', require(path.join(__dirname, 'read.js')) )
 db['understand'] = mongoose.model('understand', require(path.join(__dirname, 'understand.js')) )
-db['user'] = mongoose.model('user', require(path.join(__dirname, 'user.js')) )
-
-Object.keys(dblogin).forEach(function (modelName) {
-    db[modelName] = dblogin[modelName]
-})
+db['users'] = mongoose.model('user', require(path.join(__dirname, 'user.js')) )
 
 db.mongoose = mongoose
-db.sequelize = dblogin.sequelize
 
 module.exports = db

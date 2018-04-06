@@ -1,7 +1,7 @@
 import crypto from 'crypto'
 import jwt from 'jsonwebtoken'
 import {secrets} from '../../config/environments'
-import { user } from '../models/index'
+import { users as user } from '../models/index'
 
 function hashPassword(password){
   let hash = crypto.createHash(secrets.cryptAlgorithm)
