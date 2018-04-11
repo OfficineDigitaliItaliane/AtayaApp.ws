@@ -119,7 +119,7 @@ export async function getWriteObj() {
 
     let letters = write.letters
     write.letters = letters.map((elem) => {
-      let occurences = getAllIndexes(letters, item)
+      let occurences = getAllIndexes(letters, elem)
       return { id: uuid(), text: elem, occurences: occurences }
     })
     write.type = letters.length > 0 ? "basic" : "advanced"
