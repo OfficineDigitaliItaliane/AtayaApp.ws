@@ -20,6 +20,14 @@ function getBookFolder() {
   return __dirname + '/../../book'
 }
 
+function getAllIndexes(arr, val) {
+  var indexes = [], i;
+  for (i = 0; i < arr.length; i++)
+    if (arr[i] === val)
+      indexes.push(i);
+  return indexes;
+}
+
 export function getZipFilePath() {
   return getBookFolder() + '/book.zip'
 }
@@ -97,7 +105,7 @@ export async function getSpeakObj() {
     return speak
   })
 
-  return {speaks: speaks, files: files}
+  return { speaks: speaks, files: files }
 }
 
 export async function getWriteObj() {
@@ -111,7 +119,8 @@ export async function getWriteObj() {
 
     let letters = write.letters
     write.letters = letters.map((elem) => {
-      return {id: uuid(), text: elem}
+      let occurences = getAllIndexes(letters, item)
+      return { id: uuid(), text: elem, occurences: occurences }
     })
     write.type = letters.length > 0 ? "basic" : "advanced"
     if (letters.length == 0) {
@@ -124,7 +133,7 @@ export async function getWriteObj() {
     return write
   })
 
-  return {writes: writes, files: files}
+  return { writes: writes, files: files }
 }
 
 export async function getReadObj() {
@@ -152,7 +161,7 @@ export async function getReadObj() {
     return read
   })
 
-  return {reads: reads, files: files}
+  return { reads: reads, files: files }
 }
 
 export async function getUnderstandObj() {
@@ -194,5 +203,5 @@ export async function getUnderstandObj() {
     return understandSingle
   })
 
-  return {understand: understand, files: files}
+  return { understand: understand, files: files }
 }
