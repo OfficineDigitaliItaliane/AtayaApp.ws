@@ -11,7 +11,8 @@ var understandAnswer = new mongoose.Schema({
 var understandQuestion = new mongoose.Schema({
     body: {type: String, required: true},
     audio: {type: Media, required: true},
-    answers: {type: [understandAnswer], required: true}
+    answers: {type: [understandAnswer], required: true},
+    picture: {type: Media, required: false},
 });
 
 module.exports = new mongoose.Schema({
