@@ -25,6 +25,7 @@ db['speak'] = mongoose.model('speak', require(path.join(__dirname, 'speak.js')) 
 db['write'] = mongoose.model('write', require(path.join(__dirname, 'write.js')) )
 db['read'] = mongoose.model('read', require(path.join(__dirname, 'read.js')) )
 db['understand'] = mongoose.model('understand', require(path.join(__dirname, 'understand.js')) )
+db['final'] = mongoose.model('final', require(path.join(__dirname, 'final.js')) )
 db['users'] = mongoose.model('user', require(path.join(__dirname, 'user.js')) )
 
 db.mongoose = mongoose
