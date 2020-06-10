@@ -20,7 +20,11 @@ const all = {
     },
     cryptAlgorithm:'sha256'
   },
+
 }
+
+all['bookFolder']=`${all.root}/book`
+all['bookFolderV2'] = `${all.root}/bookV2`
 
 module.exports = _.merge(
   all,

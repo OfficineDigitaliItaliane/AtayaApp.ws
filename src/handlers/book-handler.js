@@ -16,23 +16,17 @@ function uuid() {
   return uuidv4()
 }
 
-function getBookFolder() {
-  return __dirname + '/../../book'
+export function getZipFilePath(bookFolder) {
+  return bookFolder + '/book.zip'
 }
 
-export function getZipFilePath() {
-  return getBookFolder() + '/book.zip'
-}
-
-export async function getBookTimestamp() {
-  let bookFolder = getBookFolder()
+export async function getBookTimestamp(bookFolder) {
   let fullFilePath = bookFolder + '/book.json'
   let result = await fileSystem.readJsonFile(fullFilePath)
   return result.timestamp
 }
 
-export async function createZip() {
-  let bookFolder = getBookFolder()
+export async function createZip(bookFolder, imageFolder) {
   let fullFilePath = bookFolder + '/book.zip'
   let files = []
 
@@ -45,7 +39,7 @@ export async function createZip() {
   files.push(jsonPath)
 
   for (var i = 0; i < mediaArray.length; i++) {
-    files.push(env['imageFolder'] + '/' + mediaArray[i])
+    files.push(imageFolder + '/' + mediaArray[i])
   }
 
   await zip.create(fullFilePath, files)

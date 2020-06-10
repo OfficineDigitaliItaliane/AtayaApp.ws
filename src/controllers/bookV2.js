@@ -19,7 +19,7 @@ export async function download(req, res, next){
         let {headers} = req
         apiKeyValidation(headers)
 
-        let filePath = bookHandler.getZipFilePath(env['bookFolder'])
+        let filePath = bookHandler.getZipFilePath(env['bookFolderV2'])
         res.download(filePath)
     } catch (err) {
         return next(err)
@@ -28,7 +28,7 @@ export async function download(req, res, next){
 
 export async function createZip(req, res, next){
     try {
-        await bookHandler.createZip(env['bookFolder'], env['imageFolder'])
+        await bookHandler.createZip(env['bookFolderV2'], env['imageFolder'])
         res.sendStatus(200)
     } catch (err) {
         return next(err)
@@ -41,7 +41,7 @@ export async function isUpdate(req, res, next){
         apiKeyValidation(headers)
 
         let timestamp = req.params.timestamp
-        let bookTimestamp = await bookHandler.getBookTimestamp(env['bookFolder'])
+        let bookTimestamp = await bookHandler.getBookTimestamp(env['bookFolderV2'])
 
         let result = (bookTimestamp > timestamp)
         return res.status(200).send(result).end()
@@ -49,4 +49,3 @@ export async function isUpdate(req, res, next){
         return next(err)
     }
 }
-
