@@ -92,8 +92,8 @@ export async function getSpeakObj() {
     let speak = row.toObject()
     speak.id = speak._id
     delete speak['_id']
-    files.push(speak.picture)
-    files.push(speak.audio)
+    files.push(extractFile(speak.picture))
+    files.push(extractFile(speak.audio))
     return speak
   })
 
@@ -118,8 +118,8 @@ export async function getWriteObj() {
       delete write['letters']
     }
 
-    files.push(write.picture)
-    files.push(write.audio)
+    files.push(extractFile(write.picture))
+    files.push(extractFile(write.audio))
 
     return write
   })
@@ -142,12 +142,12 @@ export async function getReadObj() {
       delete elem['_id']
       elem.read_id = read.id
 
-      files.push(elem.audio)
+      files.push(extractFile(elem.audio))
 
       return elem
     })
 
-    files.push(read.picture)
+    files.push(extractFile(read.picture))
 
     return read
   })
@@ -176,23 +176,27 @@ export async function getUnderstandObj() {
         qA.question_id = elem.id
         understandAnswers.push(qA)
 
-        files.push(qA.audio)
+        files.push(extractFile(qA.audio))
 
         return qA
       })
       delete elem['answers']
 
-      files.push(elem.audio)
+      files.push(extractFile(elem.audio))
 
       return elem
     })
 
     understandSingle.answers = understandAnswers
 
-    files.push(understandSingle.audio)
+    files.push(extractFile(understandSingle.audio))
 
     return understandSingle
   })
 
   return {understand: understand, files: files}
+}
+
+function extractFile(mediaObj){
+  return mediaObj.value;
 }
