@@ -5,20 +5,9 @@
 import * as bookHandler from '../handlers/book-handler'
 import * as env from '../../config/environments'
 
-function apiKeyValidation(headers) {
-    let apiKey = headers['x-api-key']
-    if (apiKey != env['apiKey']) {
-        let error = new Error()
-        error.code = 401
-        throw error
-    }
-}
 
 export async function download(req, res, next){
     try {
-        let {headers} = req
-        apiKeyValidation(headers)
-
         let filePath = bookHandler.getZipFilePath(env['bookFolder'])
         res.download(filePath)
     } catch (err) {
@@ -37,9 +26,6 @@ export async function createZip(req, res, next){
 
 export async function isUpdate(req, res, next){
     try{
-        let {headers} = req
-        apiKeyValidation(headers)
-
         let timestamp = req.params.timestamp
         let bookTimestamp = await bookHandler.getBookTimestamp(env['bookFolder'])
 
