@@ -8,7 +8,7 @@
         "sampleUrl": ""
     },
     "nodemonConfig": {
-        "ignore": ["book/*"]
+        "ignore": ["book/*", "bookV2/*"]
     },
     "main":"index.js",
     "scripts":{
