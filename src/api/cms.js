@@ -9,6 +9,7 @@ const readApi = require('./read')
 const writeApi = require('./write')
 const understandApi = require('./understand')
 const bookApi = require('./book')
+const finalApi = require('./final')
 
 const user = require('../controllers/users')
 
@@ -19,6 +20,7 @@ router.use('/speak', speakApi)
 router.use('/read', readApi)
 router.use('/write', writeApi)
 router.use('/understand', understandApi)
+router.use('/final', finalApi)
 router.use('/book', bookApi)
 
 module.exports = router
