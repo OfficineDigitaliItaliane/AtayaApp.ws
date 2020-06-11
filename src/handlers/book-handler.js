@@ -16,23 +16,26 @@ function uuid() {
   return uuidv4()
 }
 
-function getBookFolder() {
-  return __dirname + '/../../book'
+export function getZipFilePath(bookFolder) {
+  return bookFolder + '/book.zip'
 }
 
-export function getZipFilePath() {
-  return getBookFolder() + '/book.zip'
+function getAllIndexes(arr, val) {
+  var indexes = [], i;
+  for (i = 0; i < arr.length; i++)
+    if (arr[i] === val)
+      indexes.push(i);
+  return indexes;
 }
 
-export async function getBookTimestamp() {
-  let bookFolder = getBookFolder()
+
+export async function getBookTimestamp(bookFolder) {
   let fullFilePath = bookFolder + '/book.json'
   let result = await fileSystem.readJsonFile(fullFilePath)
   return result.timestamp
 }
 
-export async function createZip() {
-  let bookFolder = getBookFolder()
+export async function createZip(bookFolder, imageFolder) {
   let fullFilePath = bookFolder + '/book.zip'
   let files = []
 
@@ -45,7 +48,7 @@ export async function createZip() {
   files.push(jsonPath)
 
   for (var i = 0; i < mediaArray.length; i++) {
-    files.push(env['imageFolder'] + '/' + mediaArray[i])
+    files.push(imageFolder + '/' + mediaArray[i])
   }
 
   await zip.create(fullFilePath, files)
@@ -92,12 +95,12 @@ export async function getSpeakObj() {
     let speak = row.toObject()
     speak.id = speak._id
     delete speak['_id']
-    files.push(speak.picture)
-    files.push(speak.audio)
+    files.push(extractFile(speak.picture))
+    files.push(extractFile(speak.audio))
     return speak
   })
 
-  return {speaks: speaks, files: files}
+  return { speaks: speaks, files: files }
 }
 
 export async function getWriteObj() {
@@ -111,20 +114,21 @@ export async function getWriteObj() {
 
     let letters = write.letters
     write.letters = letters.map((elem) => {
-      return {id: uuid(), text: elem}
+      let occurences = getAllIndexes(letters, elem)
+      return { id: uuid(), text: elem, occurences: occurences }
     })
     write.type = letters.length > 0 ? "basic" : "advanced"
     if (letters.length == 0) {
       delete write['letters']
     }
 
-    files.push(write.picture)
-    files.push(write.audio)
+    files.push(extractFile(write.picture))
+    files.push(extractFile(write.audio))
 
     return write
   })
 
-  return {writes: writes, files: files}
+  return { writes: writes, files: files }
 }
 
 export async function getReadObj() {
@@ -142,17 +146,17 @@ export async function getReadObj() {
       delete elem['_id']
       elem.read_id = read.id
 
-      files.push(elem.audio)
+      files.push(extractFile(elem.audio))
 
       return elem
     })
 
-    files.push(read.picture)
+    files.push(extractFile(read.picture))
 
     return read
   })
 
-  return {reads: reads, files: files}
+  return { reads: reads, files: files }
 }
 
 export async function getUnderstandObj() {
@@ -176,23 +180,27 @@ export async function getUnderstandObj() {
         qA.question_id = elem.id
         understandAnswers.push(qA)
 
-        files.push(qA.audio)
+        files.push(extractFile(qA.audio))
 
         return qA
       })
       delete elem['answers']
 
-      files.push(elem.audio)
+      files.push(extractFile(elem.audio))
 
       return elem
     })
 
     understandSingle.answers = understandAnswers
 
-    files.push(understandSingle.audio)
+    files.push(extractFile(understandSingle.audio))
 
     return understandSingle
   })
 
   return {understand: understand, files: files}
+}
+
+function extractFile(mediaObj){
+  return mediaObj.value;
 }
