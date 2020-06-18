@@ -4,7 +4,7 @@ import {Media} from "./common.models"
 
 const finalTestQuestion = new mongoose.Schema({
     body: {type: String, required: true},
-    audio: {type: Media, required: false},
+    audio: {type: Media, required: true},
     answers: {type: Boolean, required: true},
     picture: {type: Media, required: false},
 });
