@@ -8,6 +8,7 @@ import fs from 'fs'
 import * as readHandler from '../handlers/read-handler'
 import * as speakHandler from '../handlers/speak-handler'
 import * as writeHandler from '../handlers/write-handler'
+import * as finalHandler from '../handlers/final-handler'
 import * as understandHandler from '../handlers/understand-handler'
 import * as fileSystem from '../components/file-system'
 import * as zip from '../components/zip'
@@ -73,6 +74,10 @@ export async function getJsonObj() {
   let understand = understandObj.understand
   understandObj.files.map((file) => files.push(file))
 
+  let finalTestObj = await getFinalTestObj()
+  let final = finalTestObj.final
+  finalTestObj.files.map((file) => files.push(file))
+
   files = files.filter((v, i, a) => a.indexOf(v) === i)
 
   let result = {
@@ -81,6 +86,7 @@ export async function getJsonObj() {
     read: reads,
     speak: speaks,
     write: writes,
+    final: final,
     files: files
   }
 
@@ -182,6 +188,10 @@ export async function getUnderstandObj() {
 
         files.push(extractFile(qA.audio))
 
+        if (qA.picture) {
+          files.push(extractFile(qA.picture))
+        }
+
         return qA
       })
       delete elem['answers']
@@ -199,6 +209,36 @@ export async function getUnderstandObj() {
   })
 
   return {understand: understand, files: files}
+}
+
+export async function getFinalTestObj() {
+  let files = []
+
+  let finalTestRowList = await finalHandler.find()
+  let finalTestListObj = finalTestRowList.map((row) => {
+    let finalTestObj = row.toObject()
+    finalTestObj.id = finalTestObj._id
+    delete finalTestObj['_id']
+
+    let questions = finalTestObj.questions
+    finalTestObj.questions = questions.map((elem)=>{
+      elem.id = elem._id
+      delete elem['_id']
+      elem.section_id = finalTestObj.id
+
+      if (elem.picture) {
+        files.push(extractFile(elem.picture))
+      }
+
+      files.push(extractFile(elem.audio))
+
+      return elem
+    })
+
+    return finalTestObj
+  })
+
+  return { final: finalTestListObj, files: files }
 }
 
 function extractFile(mediaObj){
