@@ -180,6 +180,7 @@ export async function getUnderstandObj() {
       elem.id = elem._id
       delete elem['_id']
       elem.section_id = understandSingle.id
+      
       elem.answers.map((qA) => {
         qA.id = qA._id
         delete qA['_id']
@@ -188,13 +189,13 @@ export async function getUnderstandObj() {
 
         files.push(extractFile(qA.audio))
 
-        if (qA.picture) {
-          files.push(extractFile(qA.picture))
-        }
-
         return qA
       })
       delete elem['answers']
+
+      if (elem.picture) {
+        files.push(extractFile(elem.picture))
+      }
 
       files.push(extractFile(elem.audio))
 
