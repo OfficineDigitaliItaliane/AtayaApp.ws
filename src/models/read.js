@@ -5,8 +5,8 @@ import {Media} from "./common.models"
 var Marker =  new mongoose.Schema({
     x: {type: Number, required: true},
     y: {type: Number, required: true},
-    id: {type: String, required: true} 
-});
+    id: {type: String, required: true}
+},{_id: false});
 
 var readOption = new mongoose.Schema({
     body: {type: String, required: true},
