@@ -9,10 +9,12 @@ read -> .. to Media anche added markers ( migration -> delete )
 import * as db from '../../src/models/index'
 
 (async () => {
+  console.log('Migration Started')
   await db.read.deleteMany({}).exec();
   await toMedia(db.write, ['picture', 'audio']);
-
-
+  await toMedia(db.speak, ['picture', 'audio']);
+  await toMedia(db.understand, ['video_url', 'audio']);
+  console.log('Migration Ended')
 })()
 
 
