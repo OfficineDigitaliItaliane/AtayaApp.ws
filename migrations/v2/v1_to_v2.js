@@ -14,6 +14,7 @@ import * as db from '../../src/models/index'
   await toMedia(db.write, ['picture', 'audio']);
   await toMedia(db.speak, ['picture', 'audio']);
   await toMedia(db.understand, ['video_url', 'audio']);
+  await undestandInnerNodesToMedia();
   console.log('Migration Ended')
 })()
 
@@ -21,15 +22,38 @@ import * as db from '../../src/models/index'
 async function toMedia(collection, fieldToMediaList) {
   const list = await collection.find().lean().exec()
   for (const el of list) {
-    for (const fieldToMedia of fieldToMediaList) {
-      const value = el[fieldToMedia];
-      if (typeof value == 'string') {
-        el[fieldToMedia] = {
-          value: value
-        }
+    elementToMedia(el, fieldToMediaList);
+    await collection.updateOne({ _id: el._id }, el);
+  }
+}
+
+async function undestandInnerNodesToMedia() {
+  const list = await db.understand.find().lean().exec()
+  for (const el of list) {
+    if (!el.questions) {
+      continue;
+    }
+    for (const question of el.questions) {
+      elementToMedia(question, ['audio'])
+      if (!question.answers) {
+        continue;
+      }
+      for (const answer of question.answers) {
+        elementToMedia(answer, ['audio'])
       }
     }
+    await db.understand.updateOne({ _id: el._id }, el);
+  }
+}
 
-    await db.write.update({ _id: el._id }, el);
+function elementToMedia(element, fieldToMediaList) {
+  for (const fieldToMedia of fieldToMediaList) {
+    const value = element[fieldToMedia];
+    if (typeof value == 'string') {
+      // console.log(`Converting ${value} to media`)
+      element[fieldToMedia] = {
+        value: value
+      }
+    }
   }
 }
