@@ -13,8 +13,7 @@ import * as db from '../../src/models/index'
   await db.read.deleteMany({}).exec();
   await toMedia(db.write, ['picture', 'audio']);
   await toMedia(db.speak, ['picture', 'audio']);
-  await toMedia(db.understand, ['video_url', 'audio']);
-  await undestandInnerNodesToMedia();
+  await understandSectionToMedia();
   console.log('Migration Ended')
 })()
 
@@ -27,9 +26,10 @@ async function toMedia(collection, fieldToMediaList) {
   }
 }
 
-async function undestandInnerNodesToMedia() {
+async function understandSectionToMedia() {
   const list = await db.understand.find().lean().exec()
   for (const el of list) {
+    elementToMedia(el,['video_url', 'audio'] )
     if (!el.questions) {
       continue;
     }
