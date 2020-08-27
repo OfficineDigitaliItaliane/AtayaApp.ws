@@ -15,7 +15,8 @@
         "start": "node index.js",
         "test": "./node_modules/.bin/mocha --reporter spec --compilers js:babel-core/register 'tests/test-suite.js'",
         "run": "nodemon -L index.js",
-        "doc": "apidoc -i src/"
+        "doc": "apidoc -i src/",
+        "migration_v1_to_v2": "node migrations/v1_to_v2.js"
     },
     "dependencies": {
         "apidoc": "^0.17.6",
