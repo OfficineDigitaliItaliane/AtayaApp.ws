@@ -9,7 +9,7 @@ import mongoose from "mongoose";
   const data = readAllOldData();
   for (const item of data) {
 
-    let id = 0;
+    let id = 1;
 
     elementToMedia(item, ['picture'])
     item['_id'] = item['id'];
