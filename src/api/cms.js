@@ -14,7 +14,7 @@ const finalApi = require('./final')
 const user = require('../controllers/users')
 
 router.post('/login', user.login)
-router.post('/signup', user.signup)
+// router.post('/signup', user.signup)
 router.use('/media', mediaApi)
 router.use('/speak', speakApi)
 router.use('/read', readApi)
